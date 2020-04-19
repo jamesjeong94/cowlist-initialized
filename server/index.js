@@ -1,9 +1,23 @@
-const express = require('express')
-const app = express()
-const port = 3000
+const express = require("express");
+const bodyParser = require("body-parser");
+const morgan = require("morgan");
+const app = express();
+const port = 3000;
 
-app.use(express.static('./client/dist'))
+const cowList = require("./models/model");
 
-app.get('/', (req, res) => res.send('Hello World!'))
+app.use(express.static("./client/dist"));
+app.use(bodyParser.json());
+app.use(morgan("combined"));
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.get("/api/cows", (req, res) => {
+  cowList.getAll().then((data) => {
+    res.send(data);
+  });
+});
+
+app.post("/api/cows", (req, res) => {
+  //   cowList.create();
+});
+
+app.listen(port, () => console.log(`Example app listening on port ${port}!`));
