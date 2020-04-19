@@ -1,3 +1,4 @@
+const _ = require("lodash");
 const db = require("../../db");
 
 const executeQuery = (query, values) => {
@@ -7,7 +8,8 @@ const executeQuery = (query, values) => {
 };
 
 const parseData = (options) => {
-  return options.reduce(
+  return _.reduce(
+    options,
     (parsed, value, key) => {
       parsed.string.push(`${key} = ?`);
       parsed.values.push(value);
@@ -46,7 +48,7 @@ class CowList {
     } SET ? WHERE ${parsedOptions.string.join(" AND ")}`;
     return executeQuery(
       queryString,
-      Array.prototype.concat(values, parsedOptions.value)
+      Array.prototype.concat(values, parsedOptions.values)
     );
   }
 
@@ -55,6 +57,7 @@ class CowList {
     let queryString = `DELETE FROM ${
       this.tablename
     } WHERE ${parsedOptions.string.join(" AND ")}`;
+    console.log(queryString, parsedOptions);
     return executeQuery(queryString, parsedOptions.values);
   }
 }
