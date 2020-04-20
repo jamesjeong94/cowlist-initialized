@@ -4,7 +4,7 @@ const CowItem = (props) => {
   return (
     <p>
       {props.cowData.name}
-      {props.cowData.description}
+      {/* {props.cowData.description} */}
     </p>
   );
 };

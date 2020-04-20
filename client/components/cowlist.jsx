@@ -10,6 +10,7 @@ class CowList extends React.Component {
   render() {
     return (
       <div>
+        <h3>Cows Cows Cows</h3>
         <ol>
           {this.props.cowData.map((cow) => {
             return <CowItem cowData={cow} key={cow.id} />;

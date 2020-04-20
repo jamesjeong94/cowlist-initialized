@@ -10,8 +10,8 @@ app.use(bodyParser.json());
 app.use(morgan("combined"));
 app.use(express.static("./client/dist"));
 
-app.use("/api/cows", cowRouter);
 app.use(express.static("../client"));
+app.use("/api/cows", cowRouter);
 
 app.get("/", (req, res) => {
   res.render();

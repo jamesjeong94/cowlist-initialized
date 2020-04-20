@@ -15,7 +15,17 @@ class CowInput extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    //add to database
+    fetch("./api/cows", {
+      method: "POST",
+      body: JSON.stringify({
+        name: this.state.cowName,
+        description: this.state.cowDesc,
+      }),
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    }).then(() => {
+      console.log("posted");
+      this.setState({ cowName: "", cowDesc: "" });
+    });
   }
 
   render() {
